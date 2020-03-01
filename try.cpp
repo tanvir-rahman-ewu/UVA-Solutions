@@ -1,69 +1,29 @@
-#include<stdio.h>
-#include<iostream>
-#include<cstring>
-#define sz 30
+#include<bits/stdc++.h>
 using namespace std;
-bool mat[sz][sz],num[sz];
-int m;
-void dfs(int i);
 int main()
 {
-
-    int tst,i,j,k,l,cnt;
-    char q,st[3];
-
-    scanf("%d\n\n",&tst);
-    while(tst--)
+    int a;
+    vector<int> v;
+    for(int i=0;i<3;i++)
     {
-        cin>>q;
-        getchar();
-        m=q-'A'+1;
-        cnt=0;
-        memset(mat,0,sizeof(mat));
-        memset(num,0,sizeof(num));
-          for(i=1;i<=m;i++)
-            mat[i][i]=1;
-        while(gets(st))
-        {
-            if(strlen(st)==0)
-                break;
-            mat[st[0]-'A'+1][st[1]-'A'+1]=1;
-            mat[st[1]-'A'+1][st[0]-'A'+1]=1;
-        }
-
-        for(i=1; i<=m; i++)
-        {
-            for(j=1; j<=m; j++)
-            {
-                if(mat[i][j]==1)
-                {
-                     cnt++;
-                    dfs(i);
-
-                }
-            }
-        }
-        cout<<cnt<<endl;
-        if(tst>0)
-            cout<<endl;
+        cin>>a;
+        v.push_back(a);
     }
-    return 0;
-}
-void dfs(int i)
-{
-    if(num[i]==1)
-        return;
-        num[i]=1;
-        for(int j=1; j<=m; j++)
+    for(int i=0;i<v.size();i++)
+    {
+        for(int j=0;j<v.size();j++)
         {
-            if(mat[i][j]==1)
+            if(v[j]<v[j+1])
             {
-                mat[i][j]=0;
-                dfs(j);
+                int t;
+                t=v[j];
+                v[j]=v[j+1];
+                v[j+1]=t;
             }
         }
-    return;
+    }
+    for(int i=0;i<v.size();i++)
+    {
+        cout<<v[i]<<" ";
+    }
 }
-
-
-
